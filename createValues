@@ -1,0 +1,31 @@
+var ss = SpreadsheetApp.getActiveSpreadsheet();
+var sheet = ss.getSheetByName("Nhập dữ liệu");
+
+var updateSheet = ss.getSheetByName("Chuyển đổi");
+var count = updateSheet.getDataRange().getLastRow() + 1;
+function Update() {   
+  var list = sheet.getRange("E7:J100").getValues();
+  //Browser.msgBox(list);
+  var cc = 7;
+  for(i in list){
+    var x = list[i];
+    for(j in x){
+      if(x[j] != ""){
+        updateSheet.getRange('K' + String(count)).setValue(x[j]);
+        updateSheet.getRange('A' + String(count)).setValue(sheet.getRange("D3").getValue());
+        updateSheet.getRange('B' + String(count)).setValue(sheet.getRange("B3").getValue());
+        updateSheet.getRange('C' + String(count)).setValue(sheet.getRange("D" + String(cc)).getValue());
+        updateSheet.getRange('D' + String(count)).setValue(sheet.getRange("C" + String(cc)).getValue());
+        updateSheet.getRange('E' + String(count)).setValue(sheet.getRange("B" + String(cc)).getValue());
+        updateSheet.getRange('I' + String(count)).setValue(sheet.getRange("P" + String(cc)).getValue());
+        updateSheet.getRange('J' + String(count)).setValue(sheet.getRange("R" + String(cc)).getValue());
+        var L = Math.round(sheet.getRange("N" + String(cc)).getValue() * 1000) / 1000;
+        var M = Math.round(sheet.getRange("O" + String(cc)).getValue() * 1000) / 1000;
+        updateSheet.getRange('L' + String(count)).setValue(L);
+        updateSheet.getRange('M' + String(count)).setValue(M);
+        count ++;
+      }     
+    }
+    cc ++;
+  }
+}
